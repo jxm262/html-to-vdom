@@ -16,6 +16,21 @@ describe('convertTagAttributes', function () {
                 });
             });
         });
+        
+        describe('when converting HTML5 standard attributes', function () {
+            it('sets them', function () {
+                var tag = parseHTML('<input autocomplete="off" autocapitalize="off" />')[0];
+
+                var converted = convertTagAttributes(tag);
+                console.log(converted);
+                converted.should.eql({
+                    attributes: {
+                        autocomplete: 'off',
+                        autocapitalize: 'off'
+                    }
+                });
+            });
+        });
 
         describe('when converting non-boolean standard attributes', function () {
             it('sets them', function () {
