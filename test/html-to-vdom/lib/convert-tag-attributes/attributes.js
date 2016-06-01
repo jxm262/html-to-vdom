@@ -24,10 +24,9 @@ describe('convertTagAttributes', function () {
                 var converted = convertTagAttributes(tag);
                 console.log(converted);
                 converted.should.eql({
-                    attributes: {
-                        autocomplete: 'off',
-                        autocapitalize: 'off'
-                    }
+                    attributes: {},
+                    autocomplete: 'off',
+                    autoCapitalize: 'off'
                 });
             });
         });
