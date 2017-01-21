@@ -80,6 +80,23 @@ describe('SVGAttributeHook', function () {
 
                 node.namespace.should.equal('red')
             });
+
+            it('removes attribute namespace without colon in prop from the node', function() {
+                var otherNamespace = "othernamespace";
+                var otherValue = "otherValue";
+                var testProp = "color";
+                var next = SVGAttributeHook(otherNamespace, otherValue);
+                var node = {
+                    removeAttributeNS: function(namespace, name) {
+                        this.namespace = name;
+                    },
+                    namespace: testNamespace
+                };
+
+                attributeHook.unhook(node, testProp, next)
+
+                node.namespace.should.equal('color')
+            });
         });
     });
 });
