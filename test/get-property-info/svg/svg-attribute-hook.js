@@ -51,24 +51,24 @@ describe('SVGAttributeHook', function () {
     });
 
     describe('unhook', function() {
-        context('node is has same namespace as prev', function() {
+        context('node is has same namespace as next', function() {
             it('does nothing', function() {
-                var prev = attributeHook;
+                var next = attributeHook;
                 var node = {};
                 var prop = {};
 
-                var hooked = attributeHook.hook(node, prop, prev)
+                var hooked = attributeHook.unhook(node, prop, next)
 
                 should.equal(hooked, undefined)
             });
         });
 
-        context('node has different namespace as prev', function() {
+        context('node has different namespace as next', function() {
             it('removes attribute namespace from the node', function() {
                 var otherNamespace = "othernamespace";
                 var otherValue = "otherValue";
                 var testProp = "color:red";
-                var prev = SVGAttributeHook(otherNamespace, otherValue);
+                var next = SVGAttributeHook(otherNamespace, otherValue);
                 var node = {
                     removeAttributeNS: function(namespace, name) {
                         this.namespace = name;
@@ -76,7 +76,7 @@ describe('SVGAttributeHook', function () {
                     namespace: testNamespace
                 };
 
-                attributeHook.unhook(node, testProp, prev)
+                attributeHook.unhook(node, testProp, next)
 
                 node.namespace.should.equal('red')
             });
